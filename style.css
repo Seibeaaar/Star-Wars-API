@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+}
+
+button, input {
+  display: block;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.btn__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.characters__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.character__block {
+  border-radius: 25px;
+  background: green;
+  padding: 20px;
+  width: 15%;
+  margin-bottom: 15px;
+}
+
