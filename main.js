@@ -21,7 +21,7 @@ async function getCharacters() {
       }      
     });
   } catch(err) {
-    console.log(err);
+    alert('Sorry, this episode doesn\'t even exist');
   }
 }
 
@@ -43,11 +43,16 @@ async function getPlanets(url) {
       }
     })
   } catch(err) {
-    console.log(err);
+    alert('No more planets');
   }
 }
 
 document.querySelector('.btn__info--planets').addEventListener('click', function getPlanetsCallBack() {
-  getPlanets('https://swapi.co/api/planets?page=1');
+  getPlanets('https://swapi.co/api/planets');
 });
 
+let counter = 1;
+document.querySelector('.btn__info--next').addEventListener('click', function() {
+  counter++;
+  getPlanets('https://swapi.co/api/planets/?page=' + counter);
+})
