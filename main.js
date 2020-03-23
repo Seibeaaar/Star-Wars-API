@@ -2,11 +2,10 @@ const container = document.createElement('div');
 container.classList.add('container');
 document.body.appendChild(container);
 
-async function getCharacters() {
-  try{
+function getCharacters() {
     container.innerHTML = '';
     const movieNumber = document.querySelector('input').value;
-    await fetch('https://swapi.co/api/films/' + movieNumber).then(response => response.json()).then(data => {
+    return fetch('https://swapi.co/api/films/' + movieNumber).then(response => response.json()).then(data => {
       for(let name of data.characters) {
         fetch(name).then(response => response.json()).then(res => {
           const charDiv = document.createElement('div');
@@ -17,20 +16,21 @@ async function getCharacters() {
           <li>Gender: ${res.gender}</li>
           `;
           container.append(charDiv);
+        }).catch(err => {
+          charDiv.innerHTML = 'Unknown character';
+          container.append(charDiv);
         })
       }      
-    });
-  } catch(err) {
+    }).catch(err => {
     alert('Sorry, this episode doesn\'t even exist');
-  }
+  })
 }
 
 document.querySelector('.btn__info--chars').addEventListener('click', getCharacters);
 
-async function getPlanets(url) {
+function getPlanets(url) {
   container.innerHTML = '';
-  try {
-    await fetch(url).then(response => response.json()).then(data => {
+    return fetch(url).then(response => response.json()).then(data => {
       for(let planet of data.results) {
         const planetDiv = document.createElement('div');
         planetDiv.classList.add('character__block');
@@ -41,10 +41,9 @@ async function getPlanets(url) {
         `
         container.append(planetDiv);
       }
-    })
-  } catch(err) {
+    }).catch(err => {
     alert('No more planets');
-  }
+  })
 }
 
 document.querySelector('.btn__info--planets').addEventListener('click', function getPlanetsCallBack() {
